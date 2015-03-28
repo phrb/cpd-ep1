@@ -1,0 +1,4 @@
+stress --cpu 8 --vm 4 --timeout 200s
+./mult_measure.py mult_seq_prio > mult_seq_prio_stressed.result
+plot  "mult_seq_prio_stressed.result", "mult_seq_stressed.result"
+
