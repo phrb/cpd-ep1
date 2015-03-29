@@ -35,10 +35,10 @@ if (len(sys.argv) == 3):
       tsum = 0
       for i in range(n_rep):
         #call matrix multiplication and get output (calc time)
-        print("")
-        #resultStr = subprocess.check_output([prg, matrix_sizes[m], str(threads[nt]) ])   
-        #result[i] = float(resultStr) / 1000                                #mult time in microseconds 
-        #tsum += result[i]
+        #print("")
+        resultStr = subprocess.check_output([prg, matrix_sizes[m], str(threads[nt]) ])   
+        result[i] = float(resultStr) / 1000                                #mult time in microseconds 
+        tsum += result[i]
         
       #calc mean
       mean = tsum / n_rep
