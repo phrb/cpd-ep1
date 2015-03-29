@@ -3,7 +3,7 @@
 * Makefile:
 
     Builds all C sources.
-
+    
 =======
 
 * mult_orig.c:
@@ -21,7 +21,7 @@
 * mult_seq_prio.c:
 
     Sequential version with realtime priority.
-
+    
 =======
 
 * mult_measure_par.py:
@@ -31,7 +31,7 @@
 * mult_measure_seq.py:
 
     Measure sequential version repeatedly output stats.
-
+    
 =======
 
 * mult_par_test.result:
@@ -46,13 +46,14 @@
 ## Measurement
 
 * Compile executables: make
-* Edit mult_measure_par.py to set matrix size, iterations, number of threads
-* Measurement: ./mult_measure_par.py <filename executable> <filename results>
-* Edit showresult.dem to adjust
-* Plot: gnuplot showresult.dem
+* Edit mult_measure_par.py to set matrix size, iterations, number of threads.
+* Measurement: ./mult_measure_par.py <filename executable> <filename results>.
+* Edit showresult.dem to adjust.
+* Plot: gnuplot showresult.dem.
 
 
 ## Tips 'n tricks
 
-Generate stress on OS with this [tool](http://weather.ou.edu/~apw/projects/stress/).
+Generate stress on OS with [this tool](http://weather.ou.edu/~apw/projects/stress/):
+
 ```stress --cpu 8 --vm 4 --timeout 200s```
