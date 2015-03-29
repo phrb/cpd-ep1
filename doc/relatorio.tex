@@ -1,0 +1,67 @@
+%
+% Modelo de relatório/trabalho
+%
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{array}
+\usepackage{fixltx2e}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{a4wide}
+\usepackage{multicol}
+\usepackage[table]{xcolor}
+\usepackage{makeidx}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{indentfirst}
+\usepackage[nottoc]{tocbibind}
+\usepackage{listings}
+\usepackage[a4paper,top=2.0cm,bottom=2.0cm,left=1.83cm,right=2.0cm]{geometry}
+\usepackage[square, sort, comma, numbers]{natbib}
+
+\onehalfspacing
+\graphicspath{{./img/}}
+\makeindex
+
+\lstset{
+    basicstyle=\footnotesize,
+    morekeywords={either,or,transform,rule,to,from,through,function},
+    frame=L,
+}
+
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+
+\begin{document}
+
+\hypersetup{backref,pdfpagemode=FullScreen,colorlinks=true}
+
+\title{Documentação do EP1 de MAC5742}
+\author{Thilo Koch e Pedro Bruel}
+\date{}
+\maketitle
+
+\section{Introdução} \label{sec:intro}
+
+\section{Exercício 1}
+
+\subsection{Testes}
+
+\section{Exercício 2}
+
+\subsection{Paralelização com OpenMP}
+
+\subsection{Testes}
+
+\section{Conclusões}
+
+%\newpage
+%\bibliographystyle{plainnat}
+%\bibliography{projeto}
+
+\end{document}
