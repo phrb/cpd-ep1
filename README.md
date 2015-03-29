@@ -1,39 +1,46 @@
 ## Files
-* Makefile
 
-Builds all C sources.
+* Makefile:
 
-* mult_orig.c
+    Builds all C sources.
 
-Original version of matrix multiplication (with quirk).
+=======
 
-* mult_measure_seq.py
+* mult_orig.c:
 
-Measure sequential version repeatedly output stats.
+    Original version of matrix multiplication (with quirk).
 
-* mult_seq.c
+* mult_par.c:
 
-Sequential version of matrix multiplication (with time measuring).
+    Parallel version of matrix multiplication (with time measuring).
 
-* mult_seq_prio.c
+* mult_seq.c:
 
-Sequential version with realtime priority.
+    Sequential version of matrix multiplication (with time measuring).
 
-* mult_measure_par.py
+* mult_seq_prio.c:
 
-Measure parallel version repeatedly and save stats in file.
+    Sequential version with realtime priority.
 
-* mult_par.c
+=======
 
-Parallel version of matrix multiplication (with time measuring).
+* mult_measure_par.py:
 
-* mult_par_test.result
+    Measure parallel version repeatedly and save stats in file.
 
-Example test result.
+* mult_measure_seq.py:
 
-* showresult.dem
+    Measure sequential version repeatedly output stats.
 
-Example gnuplot script to display results.
+=======
+
+* mult_par_test.result:
+
+    Example test result.
+
+* showresult.dem:
+
+    Example gnuplot script to display results.
 
 
 ## Measurement
@@ -45,7 +52,7 @@ Example gnuplot script to display results.
 * Plot: gnuplot showresult.dem
 
 
-## Tips n tricks
+## Tips 'n tricks
 
 Generate stress on OS with this [tool](http://weather.ou.edu/~apw/projects/stress/).
 ```stress --cpu 8 --vm 4 --timeout 200s```
