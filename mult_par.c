@@ -15,10 +15,18 @@ int main(int argc, char **argv) {
   struct timespec ts_start;
   struct timespec ts_stop;
   long unsigned int calctime;
+  
+  int nthreads = 1;
 
-  if (argc == 2) {
+  omp_set_dynamic(0);    
+  long tmp;                       // reduce var (instead of c[i][j]
+
+
+  if (argc == 3) {
     N = atoi (argv[1]);
     assert (N > 0);
+    nthreads = atoi(argv[2]);
+    assert (nthreads > 0); 
   }
 
   int i,j,k,mul=5;
@@ -44,15 +52,26 @@ int main(int argc, char **argv) {
   
   //printf ("Matrix generation finished.\n");         
   
+  omp_set_num_threads(nthreads);  // set thread number
+  
   // start clock
   clock_gettime(CLOCK_MONOTONIC, &ts_start);    
 
   for (i=0; i<N; i++)
-    for (j=0; j<N; j++)
-    #pragma omp parallel for
+
+    for (j=0; j<N; j++){
+      
+      tmp = 0L;
+      #pragma omp parallel for reduction(+:tmp) 
       for (k=0; k<N; k++){ 
-        c[i][j] += a[i][k] * b[k][j];
+        tmp += a[i][k] * b[k][j];
+        if (omp_get_num_threads() != nthreads)
+          printf ("Got %d threads but requested %d threads.\n", omp_get_num_threads(), nthreads); 
       }
+    
+      c[i][j] = tmp;
+    }
+
   // stop clock
   clock_gettime(CLOCK_MONOTONIC, &ts_stop);    
 

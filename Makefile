@@ -2,6 +2,8 @@ CC=gcc
 CFLAGS=-Wall
 
 all: mult_seq mult_seq_prio mult_par
+clean:
+	rm mult_seq mult_seq_prio mult_par
 
 mult_seq: mult_seq.c  
 	$(CC) $(CFLAGS) -o mult_seq mult_seq.c -lrt
