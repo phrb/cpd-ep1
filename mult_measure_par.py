@@ -57,7 +57,7 @@ if (len(sys.argv) == 3):
   for m in range(n_matrix_sizes):
     line = matrix_sizes[m] + "\t"
     for nt in range(n_threads):
-      line += str(resm[m][nt]) + "\t"
+      line += str(resm[m][nt]) + "\t "
     line += "\n"
     f.write(line)
   f.close()
