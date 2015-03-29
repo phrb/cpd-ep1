@@ -1,0 +1,10 @@
+#set term png truecolor size 600,600
+set term x11
+
+set xrange [0:1000]
+set logscale y
+#set logscale x
+plot "tst" using 1:2 title '1 thread' , "tst" using 1:3 title '2 threads' , "tst" using 1:4 title '3 threads',  "tst" using 1:5 title '4 threads'
+
+pause -1 "Hit <return> to continue"
+
