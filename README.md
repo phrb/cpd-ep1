@@ -1,29 +1,38 @@
 ## Files
 * Makefile
+
 Builds all C sources.
 
 * mult_orig.c
+
 Original version of matrix multiplication (with quirk).
 
 * mult_measure_seq.py
+
 Measure sequential version repeatedly output stats.
 
 * mult_seq.c
+
 Sequential version of matrix multiplication (with time measuring).
 
 * mult_seq_prio.c
+
 Sequential version with realtime priority.
 
 * mult_measure_par.py
+
 Measure parallel version repeatedly and save stats in file.
 
 * mult_par.c
+
 Parallel version of matrix multiplication (with time measuring).
 
 * mult_par_test.result
+
 Example test result.
 
 * showresult.dem
+
 Example gnuplot script to display results.
 
 
