@@ -1,9 +1,12 @@
 CC=gcc
 CFLAGS=-Wall -fopenmp -lrt -lm
 
-all: nowait
+all: nowait barrier
 clean:
-	rm nowait
+	rm nowait barrier
 
-mult_par_v2: mult_par_v2.c  
+nowait: nowait.c  
 	$(CC) $(CFLAGS) -o nowait nowait.c
+
+barrier: barrier.c  
+	$(CC) $(CFLAGS) -o barrier barrier.c
