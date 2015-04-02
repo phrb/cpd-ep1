@@ -10,7 +10,7 @@ import math
 n_rep = 10
 #times
 # for number of threads
-threads = [8, 16]
+threads = [1, 2, 3, 4, 8, 16]
 
 #for matrizes
 matrix_sizes =  ["50", "100", "200", "400", "600", "800", "1000", "1200"]
@@ -43,7 +43,7 @@ if (len(sys.argv) == 3):
       #calc mean
       mean = tsum / n_rep
       resm[m][nt] = int(mean)
-      print("size: " + matrix_sizes[m] + " threads: " + str(threads[nt]))
+      print( sys.argv[1] + "\tsize: " + matrix_sizes[m] + " threads: " + str(threads[nt]))
       #calc std deviation
       #diffquadsum = 0
       #for i in range(n_rep):
