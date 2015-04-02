@@ -75,6 +75,11 @@ Generate stress on OS with [this tool](http://weather.ou.edu/~apw/projects/stres
 CPU A:
 
 ```
+$ cat /proc/cpuinfo | grep model\ name
+model name      : AMD FX(tm)-6100 Six-Core Processor 
+```
+
+```
 $ lscpu
 Architecture:          x86_64
 CPU op-mode(s):        32-bit, 64-bit
