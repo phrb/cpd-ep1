@@ -7,13 +7,13 @@ import math
 #usage ./mult_measure.py prgname resultfilename
 
 #execute testprogram (prgname)
-n_rep = 2
+n_rep = 10
 #times
 # for number of threads
-threads = [1, 2, 3, 4]
+threads = [8, 16]
 
 #for matrizes
-matrix_sizes =  ["100", "200", "300", "400", "500", "600", "700", "800", "900"]
+matrix_sizes =  ["50", "100", "200", "400", "600", "800", "1000", "1200"]
 
 n_threads = len(threads)
 n_matrix_sizes = len(matrix_sizes)

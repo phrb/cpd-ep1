@@ -65,8 +65,6 @@ int main(int argc, char **argv) {
       #pragma omp parallel for reduction(+:tmp)
       for (k=0; k<N; k++){
         tmp += a[i][k] * b[k][j];
-        if (omp_get_num_threads() != nthreads)
-          printf ("Got %d threads but requested %d threads.\n", omp_get_num_threads(), nthreads);
       }
 
       c[i][j] = tmp;
