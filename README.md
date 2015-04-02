@@ -10,10 +10,6 @@
 
     Original version of matrix multiplication (with quirk).
 
-* mult_par.c:
-
-    Parallel version of matrix multiplication (with time measuring).
-
 * mult_seq.c:
 
     Sequential version of matrix multiplication (with time measuring).
@@ -22,13 +18,26 @@
 
     Sequential version with realtime priority.
     
+* mult_par_v1.c:
+
+    Parallel version of matrix multiplication. Parallelization: inner loop (k)
+    
+* mult_par_v2.c:
+
+    Parallel version of matrix multiplication. Parallelization: middle loop (j)
+
+* mult_par_v3.c:
+
+    Parallel version of matrix multiplication. Parallelization: outer loop (i)
+
+
 =======
 
-* mult_measure_par.py:
+* measure_par.py:
 
     Measure parallel version repeatedly and save stats in file.
 
-* mult_measure_seq.py:
+* measure_seq.py:
 
     Measure sequential version repeatedly output stats.
     
@@ -42,6 +51,9 @@
 
     Example gnuplot script to display results.
 
+* measure_all.sh:
+
+    Bash script to execute test series with different program versions.
 
 ## Measurement
 
