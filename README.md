@@ -75,6 +75,11 @@ Generate stress on OS with [this tool](http://weather.ou.edu/~apw/projects/stres
 CPU A:
 
 ```
+$ uname -a
+Linux HAL8k 3.2.0-4-amd64 #1 SMP Debian 3.2.65-1 x86_64 GNU/Linux
+```
+
+```
 $ cat /proc/cpuinfo | grep model\ name
 model name      : AMD FX(tm)-6100 Six-Core Processor 
 ```
