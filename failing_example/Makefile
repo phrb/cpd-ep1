@@ -3,7 +3,7 @@ CFLAGS=-Wall -fopenmp -lrt -lm
 
 all: fork fork_hangs
 clean:
-	rm lastprivate fork
+	rm fork fork_hangs
 
 fork_hangs: fork_hangs.c
 	$(CC) $(CFLAGS) -o fork_hangs fork_hangs.c
