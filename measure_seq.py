@@ -39,7 +39,7 @@ if (len(sys.argv) == 3):
     #calc mean
     mean = tsum / n_rep
     resm[m] = int(mean)
-    print( sys.argv[1] + "\tsize: " + matrix_sizes[m] )
+    print( sys.argv[1] + "\tsize: " + matrix_sizes[m] + "\tDONE.")
     #calc std deviation
     #diffquadsum = 0
     #for i in range(n_rep):
