@@ -1,0 +1,78 @@
+Arquitetura:           x86_64
+Modo(s) operacional da CPU32-bit, 64-bit
+Ordem dos bytes:       Little Endian
+CPU(s):                2
+Lista de CPU(s) on-line:0,1
+Thread(s) per núcleo  1
+Núcleo(s) por soquete:2
+Soquete(s):            1
+Nó(s) de NUMA:        1
+ID de fornecedor:      GenuineIntel
+Família da CPU:       6
+Modelo:                42
+Nome do modelo:        Intel(R) Core(TM) i5-2435M CPU @ 2.40GHz
+Step:                  7
+CPU MHz:               2372.617
+BogoMIPS:              4745.23
+cache de L1d:          32K
+cache de L1d:          32K
+cache de L2d:          6144K
+CPU(s) de nó0 NUMA:   0,1
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 42
+model name	: Intel(R) Core(TM) i5-2435M CPU @ 2.40GHz
+stepping	: 7
+cpu MHz		: 2372.617
+cache size	: 6144 KB
+physical id	: 0
+siblings	: 2
+core id		: 0
+cpu cores	: 2
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx rdtscp lm constant_tsc rep_good nopl pni ssse3 lahf_lm
+bugs		:
+bogomips	: 4745.23
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+
+processor	: 1
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 42
+model name	: Intel(R) Core(TM) i5-2435M CPU @ 2.40GHz
+stepping	: 7
+cpu MHz		: 2372.617
+cache size	: 6144 KB
+physical id	: 0
+siblings	: 2
+core id		: 1
+cpu cores	: 2
+apicid		: 1
+initial apicid	: 1
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx rdtscp lm constant_tsc rep_good nopl pni ssse3 lahf_lm
+bugs		:
+bogomips	: 4745.23
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+
+Linux localhost.localdomain 3.18.9-100.fc20.x86_64 #1 SMP Mon Mar 9 16:27:23 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux
+gcc (GCC) 4.8.3 20140911 (Red Hat 4.8.3-7)
+Copyright (C) 2013 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
