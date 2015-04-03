@@ -1,12 +1,12 @@
-CC=gcc
+CC=g++
 CFLAGS=-Wall -fopenmp -lrt -lm
 
-all: nowait barrier
+all: fork fork_hangs
 clean:
-	rm nowait barrier
+	rm lastprivate fork
 
-nowait: nowait.c  
-	$(CC) $(CFLAGS) -o nowait nowait.c
+fork_hangs: fork_hangs.c
+	$(CC) $(CFLAGS) -o fork_hangs fork_hangs.c
 
-barrier: barrier.c  
-	$(CC) $(CFLAGS) -o barrier barrier.c
+fork: fork.c
+	$(CC) $(CFLAGS) -o fork fork.c
