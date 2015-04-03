@@ -1,4 +1,4 @@
-CC=g++
+CC=gcc
 CFLAGS=-Wall -fopenmp -lrt -lm
 
 all: fork fork_hangs
