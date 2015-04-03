@@ -80,6 +80,14 @@ Linux HAL8k 3.2.0-4-amd64 #1 SMP Debian 3.2.65-1 x86_64 GNU/Linux
 ```
 
 ```
+$ gcc --version
+gcc (Debian 4.7.2-5) 4.7.2
+Copyright (C) 2012 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+
+```
 $ cat /proc/cpuinfo | grep model\ name
 model name      : AMD FX(tm)-6100 Six-Core Processor 
 ```
