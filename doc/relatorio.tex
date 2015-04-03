@@ -50,6 +50,104 @@
 
 \section{Exercício 1}
 
+Neste exercício, procuramos um exemplo que contivesse falhas em um
+tutorial, e tentamos corrigi-lo. O código do exemplo está na Seção
+\ref{sec:example}, e nossa correção na Seção \ref{sec:fixed}.
+
+Seguindo manual \textit{Guide into OpenMP: Easy multithreading
+programming for C++}, na seção sobre OpenMP e \textit{fork()}
+\footnote{http://bisqwit.iki.fi/story/howto/openmp/\#OpenmpAndFork},
+encontramos um exemplo que usa uma chamada a \textit{fork()} para criar um
+subprocesso que utiliza cláusulas OpenMP.
+
+O exemplo tem a intenção de demonstrar o uso \textit{incorreto} do OpenMP
+com \textit{fork()}, mas não apresenta uma solução.
+Nossa correção faz com que o programa execute da forma esperada (correta).
+
+\subsection{Usando OpenMP e \textit{fork()}}
+
+O problema deste exemplo é o uso de \textit{pragmas} OpenMP tanto
+no processo pai como no processo filho. Segundo as discussões
+encontradas em dois \textit{bugreports} do GCC
+\footnote{https://gcc.gnu.org/bugzilla/show\_bug.cgi?id=52303}
+\footnote{https://gcc.gnu.org/bugzilla/show\_bug.cgi?id=58378},
+o exemplo falha pois as \textit{thread pools} criadas pela \textbf{libgomp}
+(\textit{GNU Offloading and Multi Processing Runtime Library})
+\footnote{https://gcc.gnu.org/onlinedocs/libgomp/index.html} em cada
+seção paralela (\textit{\#pragma omp parallel}) são passadas aos processos
+filhos criados pela chamada a \textit{fork()}. No entanto, \textit{fork()}
+não duplica as \textit{threads} e o processo filho não termina a execução,
+entrando em \textit{deadlock} enquanto espera por \textit{threads} que não
+existem em seu contexto.
+
+As soluções apresentadas nas discussões nos \textit{bugreports} consistem
+em modificar o código da \textbf{libgomp} para que ela destrua as
+\textit{thread pools} antes da chamada a \textit{fork()}, chamando
+\textit{pthread\_atfork()}, por exemplo. Porém, essas soluções não são
+adequadas aos padrões \textbf{POSIX}, que exigem a manutenção dos valores
+privados de \textit{threads} em chamadas a \textit{fork()}. Essas soluções
+tornariam impossível reutilizar as \textit{threads} de uma \textit{thread pool}
+criada antes de uma chamada a \textit{fork()}, por exemplo.
+
+A solução correta para o uso de cláusulas OpenMP e chamadas a \textit{fork()}
+é simplesmente não utilizar \textit{pragmas} no processo pai antes de
+chamadas a \textit{fork}. Basta reorganizar o código para que os processos
+filhos criem suas próprias \textit{thread pools} e não entrem em
+\textit{deadlock}.
+
+\newpage
+\subsection{Código do Exemplo}\label{sec:example}
+\begin{figure}[H]
+    \centering
+    \lstinputlisting{../failing_example/fork_hangs.c}
+    \caption{fork\_hangs.c}
+    \label{fig:fork_hangs}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{lstlisting}
+    % ./fork_hangs
+    para_a
+    para_a
+    a ended
+    id=22884
+    id=0
+    para_b
+    {...} (hangs)
+    \end{lstlisting}
+    \caption{Saída de fork\_hangs.c}
+    \label{fig:fork_hangs_out}
+\end{figure}
+
+\newpage
+\subsection{Código Corrigido}\label{sec:fixed}
+\begin{figure}[H]
+    \centering
+    \lstinputlisting{../failing_example/fork.c}
+    \caption{fork.c}
+    \label{fig:fork}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{lstlisting}
+    % ./fork
+    id=23077
+    id=0
+    para_a
+    para_a
+    a ended
+    para_b
+    para_b
+    b ended
+    %
+    \end{lstlisting}
+    \caption{Saída de fork.c}
+    \label{fig:fork_out}
+\end{figure}
+\newpage
+
 \subsection{Testes}
 
 \section{Exercício 2}
