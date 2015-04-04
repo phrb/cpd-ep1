@@ -22,18 +22,18 @@ void b()
 
 int main()
 {
-    a();
+    a(); //Inicializa uma thread pool no processo pai.
     int p = fork();
     if(!p)
     {
         printf("id=%d\n", p);
-        b();
+        b(); // Inicializa uma thread pool no processo filho.
         _exit(0);
     }
     else
     {
-        printf("id=%d\n", p);
+        printf("id=%d\n", p); // Dentro do processo pai.
     }
-    wait(NULL);
+    wait(NULL); // Espera que b() retorne o controle.
     return 0;
 }

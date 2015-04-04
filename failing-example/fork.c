@@ -20,21 +20,20 @@ void b()
     puts("b ended");
 }
 
-int main() 
+int main()
 {
-    int p = fork();
+    int p = fork(); // Cria o processo filho antes de incializar o OpenMP.
     if(!p)
     {
         printf("id=%d\n", p);
-        b();
+        b(); // Cria uma thread pool no processo filho.
         _exit(0);
     }
     else
     {
         printf("id=%d\n", p);
-        a();
-        _exit(0);
+        a(); // Cria uma thread pool no processo pai.
     }
-    wait(NULL);
+    wait(NULL); // Espera que b() retorne o controle.
     return 0;
 }
