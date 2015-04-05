@@ -16,6 +16,7 @@
 \usepackage{courier}
 \usepackage{multicol}
 \usepackage[table]{xcolor}
+\usepackage[htt]{hyphenat}
 \usepackage{makeidx}
 \usepackage{hyperref}
 \usepackage{setspace}
@@ -56,6 +57,10 @@ Distribuída (\textit{MAC5742}). A Seção \ref{sec:ex1}
 descreve e corrige um exemplo encontrado num tutorial do padrão
 OpenMP, e a Seção \ref{sec:ex2} descreve as modificações,
 experimentos e interpretações feitos no código fornecido no enunciado.
+
+Os diretórios \texttt{src}, \texttt{failing-example} e \texttt{doc}
+contêm \textit{Makefiles} para geração dos executáveis e da documentação,
+portanto basta executar o comando \texttt{make} para gerá-los.
 
 \section{Exercício 1} \label{sec:ex1}
 
@@ -100,7 +105,7 @@ criada antes de uma chamada a \textit{fork()}, por exemplo.
 A solução correta para o uso de cláusulas OpenMP e chamadas a \textit{fork()}
 é simplesmente não utilizar \textit{pragmas} no processo pai antes de
 chamadas a \textit{fork}. Basta reorganizar o código para que os processos
-filhos criem suas próprias \textit{thread pools} e não entrem em 
+filhos criem suas próprias \textit{thread pools} e não entrem em
 \textit{deadlock}.
 \footnotetext[1]{http://bisqwit.iki.fi/story/howto/openmp/\#OpenmpAndFork}
 \footnotetext[2]{https://gcc.gnu.org/bugzilla/show\_bug.cgi?id=52303}
@@ -110,8 +115,8 @@ filhos criem suas próprias \textit{thread pools} e não entrem em
 \subsection{Código do Exemplo}\label{sec:example}
 \begin{figure}[H]
     \centering
-    \lstinputlisting{../failing-example/fork_hangs.c}
-    \caption{\texttt{fork\_hangs.c}}
+    \lstinputlisting[language=C, firstline=5, lastline=32]{../failing-example/fork_hangs.c}
+    \caption{\texttt{failing-example/fork\_hangs.c}}
     \label{fig:fork_hangs}
 \end{figure}
 
@@ -127,15 +132,15 @@ filhos criem suas próprias \textit{thread pools} e não entrem em
     para_b
     {...} (hangs)
     \end{lstlisting}
-    \caption{Saída de \texttt{fork\_hangs.c}}
+    \caption{Saída de \texttt{failing-example/fork\_hangs.c}}
     \label{fig:fork_hangs_out}
 \end{figure}
 
 \subsection{Código Corrigido}\label{sec:fixed}
 \begin{figure}[H]
     \centering
-    \lstinputlisting{../failing-example/fork.c}
-    \caption{\texttt{fork.c}}
+    \lstinputlisting[language=C, firstline=5, lastline=32]{../failing-example/fork.c}
+    \caption{\texttt{failing-example/fork.c}}
     \label{fig:fork}
 \end{figure}
 
@@ -153,25 +158,133 @@ filhos criem suas próprias \textit{thread pools} e não entrem em
     b ended
     %
     \end{lstlisting}
-    \caption{Saída de \texttt{fork.c}}
+    \caption{Saída de \texttt{failing-example/fork.c}}
     \label{fig:fork_out}
 \end{figure}
 
 \section{Exercício 2} \label{sec:ex2}
 
-Neste exercício, fizemos modificações no arquivo \texttt{mult.c}, fornecido 
+Neste exercício, fizemos modificações no arquivo \texttt{mult.c}, fornecido
 no enunciado do EP1. O arquivo realiza uma multiplicação de matrizes,
 e contém três laços aninhados.
 
 Fizemos modificações para usar cláusulas OpenMP em cada um dos três laços.
 Excertos do código implementado estão na Seção \ref{sec:code}. Depois,
-testamos essas modificações em quatro(?) arquiteturas diferentes, descritas
+testamos essas modificações em quatro arquiteturas diferentes, descritas
 na Seção \ref{sec:arch}. Os resultados e sua discussão são apresentados,
 respectivamente, nas Seções \ref{sec:res} e \ref{sec:dis}.
 
+Os \textit{scripts} \texttt{measure\_par.py} e \texttt{measure\_seq.py}
+realizam as medições dos arquivos com as modificações. O \textit{script}
+\texttt{measure\_all.sh} realiza todas as medições utilizadas neste trabalho,
+e o \textit{script} \texttt{produce\_diagrams.sh} gera os gráficos
+apresentados.
+
 \subsection{Arquiteturas Utilizadas} \label{sec:arch}
 
-\subsection{Paralelização com OpenMP} \label{sec:code}
+Esta seção descreve as arquiteturas utilizadas nos experimentos.
+Os diretórios \texttt{results/[nome\_da\_arquitetura]/} contêm arquivos
+\texttt{[nome\_da\_arquitetura].txt}, que apresentam informações mais
+detalhadas sobre cada uma.
+
+\subsubsection{HAL8k}
+
+\begin{itemize}
+    \item Linux HAL8k 3.2.0-4-amd64 \#1 SMP Debian 3.2.65-1 x86\_64 GNU/Linux;
+    \item AMD FX(tm)-6100 Six-Core Processor;
+    \item gcc (Debian 4.7.2-5) 4.7.2.
+\end{itemize}
+
+\subsubsection{hpops}
+
+\textbf{hpops}:
+
+\begin{itemize}
+    \item Linux hpops 3.2.0-4-amd64 \#1 SMP Debian 3.2.65-1+deb7u1
+        x86\_64 GNU/Linux;
+    \item Intel(R) Core(TM)2 Duo CPU E7500;
+    \item gcc (Debian 4.7.2-5) 4.7.2.
+\end{itemize}
+
+\textbf{hpops2}:
+
+\begin{itemize}
+    \item Mesma arquitetura que \textbf{hpops};
+    \item Linux hpops 3.19.3-200.fc21.x86\_64 \#1 SMP x86\_64 GNU/Linux;
+    \item gcc (GCC) 4.9.2 20150212 (Red Hat 4.9.2-6).
+\end{itemize}
+
+\textbf{hpops2\_50}:
+
+\begin{itemize}
+    \item Mesmo \textit{setup} que \textbf{hpops2};
+    \item 50 amostras.
+\end{itemize}
+
+\textbf{hpops2\_O3}:
+
+\begin{itemize}
+    \item Mesmo \textit{setup} que \textbf{hpops2};
+    \item Compilado com \texttt{-O3}.
+\end{itemize}
+
+\subsubsection{mops}
+
+\begin{itemize}
+    \item Linux mops 3.18.9-100.fc20.x86\_64 \#1 SMP x86\_64 GNU/Linux;
+    \item Intel(R) Core(TM) i5-2435M CPU;
+    \item gcc (GCC) 4.8.3 20140911 (Red Hat 4.8.3-7).
+\end{itemize}
+
+\subsubsection{virtbox}
+
+\begin{itemize}
+    \item Linux localhost.localdomain 3.18.9-100.fc20.x86\_64 \#1 SMP x86\_64
+        GNU/Linux
+    \item Intel(R) Core(TM) i5-2435M CPU
+    \item gcc (GCC) 4.8.3 20140911 (Red Hat 4.8.3-7)
+\end{itemize}
+
+\subsection{Paralelizações com OpenMP} \label{sec:code}
+
+Esta seção apresenta as modificações que fizemos no arquivo
+\texttt{mult.c}, paralelizando a multiplicação de matrizes
+em cada um dos três níveis de laço aninhado. 
+
+Nos laços mais externos, utilizamos o \textit{pragma omp parallel for},
+especificando que cada \textit{thread} terá seus índices de
+acesso privados, através do parâmetro \textit{private}.
+
+No laço mais interno, utilizamos uma variável temporária para que pudéssemos
+utilizar o parâmetro \textit{reduction}, que não pode ser usado nos elementos
+da matriz \textit{c}.
+
+\subsubsection{Paralelização do Laço mais Interno}
+
+\begin{figure}[H]
+    \centering
+    \lstinputlisting[language=C, firstline=60, lastline=69]{../src/mult_par_v1.c}
+    \caption{\texttt{src/mult\_par\_v1.c}}
+    \label{fig:par_v1}
+\end{figure}
+
+\subsubsection{Paralelização do Laço do Meio}
+
+\begin{figure}[H]
+    \centering
+    \lstinputlisting[language=C, firstline=58, lastline=65]{../src/mult_par_v2.c}
+    \caption{\texttt{src/mult\_par\_v2.c}}
+    \label{fig:par_v2}
+\end{figure}
+
+\subsubsection{Paralelização do Laço mais Externo}
+
+\begin{figure}[H]
+    \centering
+    \lstinputlisting[language=C, firstline=58, lastline=65]{../src/mult_par_v3.c}
+    \caption{\texttt{src/mult\_par\_v3.c}}
+    \label{fig:par_v3}
+\end{figure}
 
 \subsection{Resultados} \label{sec:res}
 
