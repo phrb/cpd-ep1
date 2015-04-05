@@ -33,7 +33,6 @@ f26="../results/hpops2_O3/v1_hpops_O3.result"
 f27="../results/hpops2_O3/v2_hpops_O3.result"
 f28="../results/hpops2_O3/v3_hpops_O3.result"
 
-
 set term png truecolor size 1000,800
 #set term x11
 set key inside
@@ -42,18 +41,30 @@ set xrange [30:1500]
 set logscale y
 set logscale x
 
-
-set title "Compare sequencial and single threaded versions performance - AMD FX 6100"
 set xlabel "Matrix size [N]"
 set ylabel "Time [us]"
 
-# compare par versions
+#HAL
+set output 'HAL_par_threads.png'
+set title "Compare threaded performance - AMD FX 6100"
+plot f04 using 1:2 title '1t' , f04 using 1:3 title '2t' ,  f04 using 1:4 title '3t', f04 using 1:5 title '4t' ,  f04 using 1:6 title '8t', f04 using 1:7 title '16t'
 
-# amdfx6100
-plot f01 using 1:2 title 'seq', f02 using 1:2 title 'inner', f03 using 1:2 title 'middle', f04 using 1:2 title 'outer' 
+#hpops2
+set output 'hpops2_par_threads.png'
+set title "Compare threaded performance - Core 2 Duo"
+plot f12 using 1:2 title '1t' , f12 using 1:3 title '2t' , f12 using 1:4 title '3t', f12 using 1:5 title '4t' ,  f12 using 1:6 title '8t', f12 using 1:7 title '16t'
 
-# core2duo
-#plot f09 using 1:2 title 'seq', f10 using 1:2 title 'inner', f11 using 1:2 title 'middle', f12 using 1:2 title 'outer' 
+#mops
+set output 'mops_par_threads.png'
+set title "Compare threaded performance - i5 2435M"
+plot f20 using 1:2 title '1t' , f20 using 1:3 title '2t' , f20 using 1:4 title '3t', f20 using 1:5 title '4t' ,  f20 using 1:6 title '8t', f20 using 1:7 title '16t'
+
+
+#hpops2_O3
+set output 'hpops2_O3_par_threads.png'
+set title "Compare threaded performance - Core 2 Duo optimized (O3)"
+plot f28 using 1:2 title '1t' , f28 using 1:3 title '2t' ,  f28 using 1:4 title '3t', f28 using 1:5 title '4t' 
+
 
 
 pause -1 "Hit <return> to continue"
