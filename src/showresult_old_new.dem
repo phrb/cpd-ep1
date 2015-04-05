@@ -16,7 +16,7 @@ set xrange [30:1500]
 set logscale y
 set logscale x
 
-set output 'compare_old_new_os.png'
+set output '../diagrams/compare_old_new_os.png'
 set title "Compare performance old vs new (os/gcc) - Core 2 Duo for 4 threads"
 set xlabel "Matrix size [N]"
 set ylabel "Time [us]"

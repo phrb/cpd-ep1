@@ -47,17 +47,17 @@ set xlabel "Matrix size [N]"
 set ylabel "Time [us]"
 
 # amdfx6100
-set output 'cmp_single_thread_HAL.png'
+set output '../diagrams/cmp_single_thread_HAL.png'
 set title "Compare sequencial and single threaded versions performance - AMD FX 6100"
 plot f01 using 1:2 title 'seq', f02 using 1:2 title 'v1 (inner)', f03 using 1:2 title 'v2 (middle)', f04 using 1:2 title 'v3 (outer)' 
 
 # core2duo
-set output 'cmp_single_thread_hpops2.png'
+set output '../diagrams/cmp_single_thread_hpops2.png'
 set title "Compare sequencial and single threaded versions performance - Core 2 Duo "
 plot f09 using 1:2 title 'seq', f10 using 1:2 title 'v1 (inner)', f11 using 1:2 title 'v2 (middle)', f12 using 1:2 title 'v3 (outer)' 
 
 # core2duo O3
-set output 'cmp_single_thread_hpops2_O3.png'
+set output '../diagrams/cmp_single_thread_hpops2_O3.png'
 set title "Compare sequencial and single threaded versions performance - Core 2 Duo + O3"
 plot f25 using 1:2 title 'seq', f26 using 1:2 title 'v1 (inner)', f27 using 1:2 title 'v2 (middle)', f28 using 1:2 title 'v3 (outer)' 
 

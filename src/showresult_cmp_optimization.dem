@@ -45,11 +45,11 @@ set xlabel "Matrix size [N]"
 set ylabel "Time [us]"
 
 #HAL
-set output 'hpops_cmp_optimization-2t.png'
+set output '../diagrams/hpops_cmp_optimization-2t.png'
 set title "Compare performance with or without optimization (gcc -O3) for 2 threads"
 plot f12 using 1:3 title 'without' ,  f28 using 1:3 title 'with'
 
-set output 'hpops_cmp_optimization-4t.png'
+set output '../diagrams/hpops_cmp_optimization-4t.png'
 set title "Compare performance with or without optimization (gcc -O3) for 4 threads"
 plot f12 using 1:5 title 'without' ,  f28 using 1:5 title 'with'
 
