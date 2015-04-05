@@ -56,18 +56,13 @@ int main(int argc, char **argv) {
   clock_gettime(CLOCK_MONOTONIC, &ts_start);
 
   #pragma omp parallel for private(k,j)
-  for (i=0; i<N; i++)
-//    #pragma omp parallel for private(k)
+  for (i=0; i<N; i++){
     for (j=0; j<N; j++){
-//      #pragma omp parallel for reduction(+:tmp)
       for (k=0; k<N; k++){
         c[i][j] += a[i][k] * b[k][j];
-        /*
-        if (omp_get_num_threads() != nthreads)
-          printf ("Got %d threads but requested %d threads.\n", omp_get_num_threads(), nthreads);
-        */
       }
     }
+  }
 
   // stop clock
   clock_gettime(CLOCK_MONOTONIC, &ts_stop);

@@ -2,35 +2,28 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-void a()
-{
+void a(){
     #pragma omp parallel num_threads(2)
     {
-        puts("para_a"); // output twice
+        puts("para_a");
     }
-    puts("a ended"); // output once
+    puts("a ended");
 }
-
-void b()
-{
+void b(){
     #pragma omp parallel num_threads(2)
     {
         puts("para_b");
     }
     puts("b ended");
 }
-
-int main()
-{
+int main(){
     int p = fork(); // Cria o processo filho antes de incializar o OpenMP.
-    if(!p)
-    {
+    if(!p){
         printf("id=%d\n", p);
         b(); // Cria uma thread pool no processo filho.
         _exit(0);
     }
-    else
-    {
+    else{
         printf("id=%d\n", p);
         a(); // Cria uma thread pool no processo pai.
     }

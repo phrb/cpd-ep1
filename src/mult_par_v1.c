@@ -57,18 +57,16 @@ int main(int argc, char **argv) {
   // start clock
   clock_gettime(CLOCK_MONOTONIC, &ts_start);
 
-  for (i=0; i<N; i++)
-
+  for (i=0; i<N; i++){
     for (j=0; j<N; j++){
-
       tmp = 0L;
       #pragma omp parallel for reduction(+:tmp)
       for (k=0; k<N; k++){
         tmp += a[i][k] * b[k][j];
       }
-
       c[i][j] = tmp;
     }
+  }
 
   // stop clock
   clock_gettime(CLOCK_MONOTONIC, &ts_stop);
