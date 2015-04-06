@@ -38,6 +38,7 @@ set term png truecolor size 1000,800
 #set term x11
 set key inside
 set key b
+set yrange [100:1000000000]
 set xrange [30:1500]
 set logscale y
 set logscale x
