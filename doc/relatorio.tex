@@ -251,7 +251,7 @@ detalhadas sobre cada uma.
 
 Esta seção apresenta as modificações que fizemos no arquivo
 \texttt{mult.c}, paralelizando a multiplicação de matrizes
-em cada um dos três níveis de laço aninhado. 
+em cada um dos três níveis de laço aninhado.
 
 Nos laços mais externos, utilizamos o \textit{pragma omp parallel for},
 especificando que cada \textit{thread} terá seus índices de
@@ -290,37 +290,99 @@ da matriz \textit{c}.
 
 \subsection{Resultados} \label{sec:res}
 
+\newpage
 \subsubsection{Sequencial vs. OpenMP com uma thread}
 
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \begin{subfigure}[b]{0.3\textwidth}
+    \begin{subfigure}[H]{0.5\textwidth}
         \includegraphics[width=\textwidth]{cmp_single_thread_HAL}
-        \caption{A gull}
-        \label{fig:gull}
+        \caption{HAL8k}
+        \label{fig:8k_cmp_single}
     \end{subfigure}%
     ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
     %(or a blank line to force the subfigure onto a new line)
-    \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{cmp_single_thread_HAL}
-        \caption{A tiger}
-        \label{fig:tiger}
+    \begin{subfigure}[H]{0.5\textwidth}
+        \includegraphics[width=\textwidth]{cmp_single_thread_hpops2_O3}
+        \caption{hpops2\_O3}
+        \label{fig:hpops2_O3_cmp_single}
     \end{subfigure}
     ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
     %(or a blank line to force the subfigure onto a new line)
-    \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{cmp_single_thread_HAL}
-        \caption{A mouse}
-        \label{fig:mouse}
+    \begin{subfigure}[H]{0.5\textwidth}
+        \includegraphics[width=\textwidth]{cmp_single_thread_hpops2}
+        \caption{hpops2}
+        \label{fig:hpops2_cmp_single}
     \end{subfigure}
-    \caption{Pictures of animals}\label{fig:animals}
+    \caption{\textit{Thread} Única vs. Sequencial}\label{fig:animals}
 \end{figure}
 
-\subsubsection{Paralelização do Laço mais Interno}
-
-\subsubsection{Paralelização do Laço do Meio}
-
+\newpage
 \subsubsection{Paralelização do Laço mais Externo}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[H]{0.5\textwidth}
+        \includegraphics[width=\textwidth]{HAL_par_threads}
+        \caption{HAL8k}
+        \label{fig:8k_par_threads}
+    \end{subfigure}%
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+    %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[H]{0.5\textwidth}
+        \includegraphics[width=\textwidth]{hpops2_O3_par_threads}
+        \caption{hpops2\_O3}
+        \label{fig:hpops2_O3_par_threads}
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+    %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[H]{0.5\textwidth}
+        \includegraphics[width=\textwidth]{hpops2_par_threads}
+        \caption{hpops2}
+        \label{fig:hpops2_par_threads}
+    \end{subfigure}%
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+    %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[H]{0.5\textwidth}
+        \includegraphics[width=\textwidth]{mops_par_threads}
+        \caption{mops}
+        \label{fig:mops_par_threads}
+    \end{subfigure}
+    \caption{Comparação de \textit{Threads} no Laço mais Externo}\label{fig:animals}
+\end{figure}
+
+\subsubsection{OpenMP com 2 \textit{Threads}}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[H]{0.5\textwidth}
+        \includegraphics[width=\textwidth]{HAL_cmp_versions-2t}
+        \caption{HAL8k}
+        \label{fig:8k_cmp_2t}
+    \end{subfigure}%
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+    %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[H]{0.5\textwidth}
+        \includegraphics[width=\textwidth]{hpops2_O3_cmp_versions-2t}
+        \caption{hpops2\_O3}
+        \label{fig:hpops2_O3_cmp_2t}
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+    %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[H]{0.5\textwidth}
+        \includegraphics[width=\textwidth]{hpops2_cmp_versions-2t}
+        \caption{hpops2}
+        \label{fig:hpops2_cmp_2t}
+    \end{subfigure}%
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+    %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[H]{0.5\textwidth}
+        \includegraphics[width=\textwidth]{hpops_cmp_optimization-2t}
+        \caption{hpops}
+        \label{fig:hpops_cmp_2t}
+    \end{subfigure}
+    \caption{Comparação de \textit{Threads} no Laço mais Externo}\label{fig:animals}
+\end{figure}
+
+
 
 \subsection{Conclusões} \label{sec:dis}
 
