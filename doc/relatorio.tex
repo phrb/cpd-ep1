@@ -291,7 +291,7 @@ da matriz \textit{c}.
 \subsection{Resultados} \label{sec:res}
 
 \newpage
-\subsubsection{Sequencial vs. OpenMP com uma thread}
+\subsubsection{Uma \textit{thread} OpenMP vs. Algoritmo Sequencial}
 
 \begin{figure}[H]
     \centering
@@ -314,11 +314,11 @@ da matriz \textit{c}.
         \caption{hpops2}
         \label{fig:hpops2_cmp_single}
     \end{subfigure}
-    \caption{\textit{Thread} Única vs. Sequencial}\label{fig:animals}
+    \caption{Uma \textit{thread} OpenMP vs. Algoritmo Sequencial}\label{fig:animals}
 \end{figure}
 
 \newpage
-\subsubsection{Paralelização do Laço mais Externo}
+\subsubsection{Paralelização do Laço mais Externo (de 1 a 16 \textit{threads})}
 \begin{figure}[H]
     \centering
     \begin{subfigure}[H]{0.5\textwidth}
@@ -347,11 +347,11 @@ da matriz \textit{c}.
         \caption{mops}
         \label{fig:mops_par_threads}
     \end{subfigure}
-    \caption{Comparação de \textit{Threads} no Laço mais Externo}\label{fig:animals}
+    \caption{Comparação de \textit{threads} (de 1 a 16), na paralelização do Laço mais Externo}\label{fig:animals}
 \end{figure}
 
 \newpage
-\subsubsection{OpenMP com 2 \textit{Threads}}
+\subsubsection{OpenMP com 2 \textit{threads} (em todas as versões de paralelização)}
 \begin{figure}[H]
     \centering
     \begin{subfigure}[H]{0.5\textwidth}
@@ -373,11 +373,11 @@ da matriz \textit{c}.
         \caption{hpops2}
         \label{fig:hpops2_cmp_2t}
     \end{subfigure}%
-    \caption{OpenMP com duas \textit{Threads}, todas as versões}\label{fig:animals}
+    \caption{OpenMP com duas \textit{threads}, em todas as versões de paralelização}\label{fig:animals}
 \end{figure}
 
 \newpage
-\subsubsection{OpenMP com 4 \textit{Threads}}
+\subsubsection{OpenMP com 4 \textit{Threads} (em todas as versões de paralelização)}
 \begin{figure}[H]
     \centering
     \begin{subfigure}[H]{0.5\textwidth}
@@ -399,30 +399,30 @@ da matriz \textit{c}.
         \caption{hpops2}
         \label{fig:hpops2_cmp_2t}
     \end{subfigure}%
-    \caption{OpenMP com quatro \textit{Threads}, todas as versões}\label{fig:animals}
+    \caption{OpenMP com quatro \textit{Threads}, em todas as versões de paralelização}\label{fig:animals}
 \end{figure}
 
 \newpage
-\subsubsection{OpenMP com \texttt{-O3}}
+\subsubsection{Compilação com a \textit{flag} \texttt{-O3}}
 \begin{figure}[H]
     \centering
     \begin{subfigure}[H]{0.5\textwidth}
         \includegraphics[width=\textwidth]{hpops_cmp_optimization-2t}
-        \caption{hpops}
+        \caption{2 \textit{threads}}
         \label{fig:hpops_o3_2t}
     \end{subfigure}%
     ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
     %(or a blank line to force the subfigure onto a new line)
     \begin{subfigure}[H]{0.5\textwidth}
         \includegraphics[width=\textwidth]{hpops_cmp_optimization-4t}
-        \caption{hpops}
+        \caption{4 \textit{threads}}
         \label{fig:hpops_o3_4t}
     \end{subfigure}
-    \caption{OpenMP com \texttt{-O3}}\label{fig:animals}
+    \caption{\textbf{hpops}, compilação com a \textit{flag} \texttt{-O3}}\label{fig:animals}
 \end{figure}
 
 \newpage
-\subsubsection{Diferentes Versões do GCC e do Kernel}
+\subsubsection{Usando Diferentes Versões do GCC e do Kernel}
 \begin{figure}[H]
     \centering
     \begin{subfigure}[H]{0.5\textwidth}
