@@ -350,6 +350,7 @@ da matriz \textit{c}.
     \caption{Comparação de \textit{Threads} no Laço mais Externo}\label{fig:animals}
 \end{figure}
 
+\newpage
 \subsubsection{OpenMP com 2 \textit{Threads}}
 \begin{figure}[H]
     \centering
@@ -372,18 +373,65 @@ da matriz \textit{c}.
         \caption{hpops2}
         \label{fig:hpops2_cmp_2t}
     \end{subfigure}%
+    \caption{OpenMP com duas \textit{Threads}, todas as versões}\label{fig:animals}
+\end{figure}
+
+\newpage
+\subsubsection{OpenMP com 4 \textit{Threads}}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[H]{0.5\textwidth}
+        \includegraphics[width=\textwidth]{HAL_cmp_versions-4t}
+        \caption{HAL8k}
+        \label{fig:8k_cmp_2t}
+    \end{subfigure}%
     ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
     %(or a blank line to force the subfigure onto a new line)
     \begin{subfigure}[H]{0.5\textwidth}
-        \includegraphics[width=\textwidth]{hpops_cmp_optimization-2t}
-        \caption{hpops}
-        \label{fig:hpops_cmp_2t}
+        \includegraphics[width=\textwidth]{hpops2_O3_cmp_versions-4t}
+        \caption{hpops2\_O3}
+        \label{fig:hpops2_O3_cmp_2t}
     \end{subfigure}
-    \caption{Comparação de \textit{Threads} no Laço mais Externo}\label{fig:animals}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+    %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[H]{0.5\textwidth}
+        \includegraphics[width=\textwidth]{hpops2_cmp_versions-4t}
+        \caption{hpops2}
+        \label{fig:hpops2_cmp_2t}
+    \end{subfigure}%
+    \caption{OpenMP com quatro \textit{Threads}, todas as versões}\label{fig:animals}
 \end{figure}
 
+\newpage
+\subsubsection{OpenMP com \texttt{-O3}}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[H]{0.5\textwidth}
+        \includegraphics[width=\textwidth]{hpops_cmp_optimization-2t}
+        \caption{hpops}
+        \label{fig:hpops_o3_2t}
+    \end{subfigure}%
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+    %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[H]{0.5\textwidth}
+        \includegraphics[width=\textwidth]{hpops_cmp_optimization-4t}
+        \caption{hpops}
+        \label{fig:hpops_o3_4t}
+    \end{subfigure}
+    \caption{OpenMP com \texttt{-O3}}\label{fig:animals}
+\end{figure}
 
-
+\newpage
+\subsubsection{Diferentes Versões do GCC e do Kernel}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[H]{0.5\textwidth}
+        \includegraphics[width=\textwidth]{compare_old_new_os}
+        \caption{hpops e hpops2}
+        \label{fig:hpops_hpops2}
+    \end{subfigure}%
+    \caption{OpenMP em diferentes versões do GCC e Kernel}\label{fig:animals}
+\end{figure}
 \subsection{Conclusões} \label{sec:dis}
 
 %\newpage
