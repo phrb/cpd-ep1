@@ -33,7 +33,7 @@ f26="../results/hpops2_O3/v1_hpops_O3.result"
 f27="../results/hpops2_O3/v2_hpops_O3.result"
 f28="../results/hpops2_O3/v3_hpops_O3.result"
 
-set term png truecolor size 1000,800
+set term png truecolor size 1000,800 enhanced font 'Verdana,16' 
 #set term x11
 set key inside
 set key b
@@ -41,6 +41,7 @@ set yrange [100:1000000000]
 set xrange [30:1500]
 set logscale y
 set logscale x
+set pointsize 3
 
 set xlabel "Matrix size [N]"
 set ylabel "Time [us]"

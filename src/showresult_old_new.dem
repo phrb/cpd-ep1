@@ -8,7 +8,7 @@ f10="../results/hpops/v1_hpops.result"
 f11="../results/hpops/v2_hpops.result"
 f12="../results/hpops/v3_hpops.result"
 
-set term png truecolor size 1000,800
+set term png truecolor size 1000,800 enhanced font 'Verdana,16'
 #set term x11
 set key inside
 set key b
@@ -16,6 +16,7 @@ set yrange [100:1000000000]
 set xrange [30:1500]
 set logscale y
 set logscale x
+set pointsize 3
 
 set output '../diagrams/compare_old_new_os.png'
 set title "Compare performance old vs new (os/gcc) - Core 2 Duo for 4 threads"
