@@ -292,7 +292,7 @@ Nesta Seção apresentamos os resultados para as arquiteturas \textbf{hpops}
 (Figura \ref{fig:8k_cmp_2t}).
 
 Neste experimento podemos observar que a paralelização do laço mais
-interno, usando \textit{reduction}, teve tempo de execução menor
+interno, usando \textit{reduction}, teve tempo de execução maior
 do que as outras versões para matrizes pequenas, mas essa diferença
 diminui ao aumentar o tamanho das matrizes. Para matrizes grandes,
 a paralelização do laço mais interno tem resultados mais rápidos.
@@ -384,7 +384,7 @@ laço mais interno em relação à otimização \texttt{-O3}, na arquitetura
 \subsubsection{Usando Diferentes Versões do GCC e do Kernel}
 
 Finalmente, apresentamos na Figura \ref{fig:cmpv} resultados utilizando
-diferentes versões do kernel do linux e do compilador GCC, na mesma
+diferentes versões do kernel do Linux e do compilador GCC, na mesma
 arquitetura. (Ver \textbf{hpops} e \textbf{hpops2}, na Seção \ref{sec:arch})
 
 Apesar de serem versões bem próximas, é possível notar um pequeno
