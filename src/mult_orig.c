@@ -28,23 +28,23 @@ int main(int argc, char **argv) {
 
     for (i=0; i<N; i++)
       for (j=0; j<N; j++) {
-	a[i][j] = i*mul;
-	b[i][j] = i;
-	c[i][j] = 0;
+      	a[i][j] = i*mul;
+	      b[i][j] = i;
+	      c[i][j] = 0;
       }
 
     printf ("Matrix generation finished.\n");         
     
     for (i=0; i<N; i++)
       for (j=0; j<N; j++)
-	for (k=0; k<N; k++)
-	  c[i][j] += a[i][k] * b[k][j];
+	      for (k=0; k<N; k++)
+	        c[i][j] += a[i][k] * b[k][j];
 
     printf ("Multiplication finished.\n");         
     
     for (i=0; i<N; i++)
       for (j=0; j<N; j++)
-	assert ( c[i][j] == i*mul * col_sum);  
+	      assert ( c[i][j] == i*mul * col_sum);  
 
     printf ("Test finished.\n");         
 }

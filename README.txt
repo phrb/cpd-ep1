@@ -8,7 +8,7 @@
 
 * mult_orig.c:
 
-    Original version of matrix multiplication (with quirk).
+    Original version of matrix multiplication.
 
 * mult_seq.c:
 
@@ -16,7 +16,7 @@
 
 * mult_seq_prio.c:
 
-    Sequential version with realtime priority.
+    Sequential version with realtime priority (results not used in report).
     
 * mult_par_v1.c:
 
@@ -43,13 +43,9 @@
     
 =======
 
-* mult_par_test.result:
+* showresult*.dem: 
 
-    Example test result.
-
-* showresult.dem:
-
-    Example gnuplot script to display results.
+    Gnuplot scripts to generate diagrams.
 
 * measure_all.sh:
 
@@ -60,13 +56,15 @@
 * Compile executables: make
 * Edit mult_measure_par.py to set matrix size, iterations, number of threads.
 * Measurement: ./mult_measure_par.py <filename executable> <filename results>.
-* Edit showresult.dem to adjust.
-* Plot: gnuplot showresult.dem.
-
+* Edit showresult*.dem to adjust.
+* Generate diagram e.g.: gnuplot showresult_cmp_versions.dem.
+* Generate all diagrams at once ./produce_diagrams.sh
 
 ## Tips 'n tricks
 
 Generate stress on OS with [this tool](http://weather.ou.edu/~apw/projects/stress/):
 
 ```stress --cpu 8 --vm 4 --timeout 200s```
+
+(was used compare a normal with a high priorized version (mult_seq_prio.c))
 
