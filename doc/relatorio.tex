@@ -403,16 +403,20 @@ Apesar de serem versões bem próximas, é possível notar um pequeno
 \newpage
 \section{Conclusões} \label{sec:dis}
 
-Pudemos observar o custo de se paralelizar um programa
+Esperávamos poder observar o custo de se paralelizar um programa
 mas não utilizar os recursos de paralelismo, isto é,
 utilizar as diretivas de compilação do OpenMP mas
-executar o programa em apenas uma \textit{thread}.
+executar o programa em apenas uma \textit{thread}. No entanto,
+os resultados obtidos na comparação realizada não foram conclusivos,
+e não pudemos observar esse custo com clareza.
 
 Constatamos que simplesmente aumentar o número de \textit{threads}
-não beneficia todas as arquiteturas, em relação a um programa
+beneficia todas as arquiteturas, em relação a um programa
 já paralelizado. O número de núcleos de processamento disponíveis
 impactou a relação entre o desempenho de programas com mais e
-menos \textit{threads}.
+menos \textit{threads}. Podemos ver que o desempenho é maior
+quando o número de \textit{threads} é $(2*num\_cores)$, para
+$num\_cores$ núcleos de processamento de uma dada arquitetura.
 
 Também foi possível observar que a estratégia de paralelização ---
 o laço escolhido para paralelizar, no nosso caso --- tem diferentes
@@ -423,9 +427,13 @@ estratégias conforme as matrizes ficam maiores.
 
 Observamos o efeito do parâmetro de compilação \texttt{-O3},
 que sempre produziu programas com melhor desempenho, em comparação à
-compilação sem o parâmetro. Finalmente, observamos um desempenho mais
-rápido utilizando um compilador e um kernel mais novos, mesmo que
-não sejam versões muito distantes.
+compilação sem a \textit{flag}. Como o compilador faz muitas otimizações
+diferentes com o parâmetro \texttt{-O3}, não fornecemos interpretações ou
+possíveis causas para esse aumento de desempenho.
+
+Finalmente, observamos um desempenho mais rápido utilizando uma versão 
+compilador GCC e um kernel do Linux mais novos, mesmo que não sejam versões 
+muito distantes.
 
 %\newpage
 %\bibliographystyle{plainnat}
