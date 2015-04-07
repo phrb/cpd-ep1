@@ -196,23 +196,6 @@ documentação, mas estão armazenados em arquivos
 
 \subsubsection{Uma \textit{thread} OpenMP vs. Algoritmo Sequencial}
 
-Neste experimento é possível ver o \textit{overhead} causado pelo uso das
-diretivas de compilação. A versão sequencial de \texttt{mult.c} foi mais rápida
-do que as versões com uma \textit{thread}, em todos os tamanhos de matriz, nas
-arquiteturas \textbf{hpops2} (Figura \ref{fig:hpops2_cmp_single}) e
-\textbf{hpops2\_O3}(Figura \ref{fig:hpops2_O3_cmp_single}). Na arquitetura
-\textbf{HAL8k} (Figura \ref{fig:8k_cmp_single}), por outro lado, podemos
-observar que a versão com uma única \textit{thread} OpenMP ganha da
-versão sequencial, para tamanhos de matriz grandes o suficiente. Nossa
-interpretação é que essa diferença não é significativa, pois é devida a
-variações nas medições.
-
-Na arquitetura \textbf{hpops2\_O3}, vemos que a otimização do GCC \texttt{-O3}
-produziu \textit{speedups} para todas as versões, inclusive a sequencial.
-Essa otimização beneficiou mais as versões sequencial, de paralelização do
-laço do meio, e de paralelização do laço mais externo, em matrizes de tamanho
-pequeno.
-
 \begin{figure}[H]
     \centering
     \begin{subfigure}[H]{0.5\textwidth}
@@ -236,6 +219,24 @@ pequeno.
     \end{subfigure}
     \caption{Uma \textit{thread} OpenMP vs. Algoritmo Sequencial}\label{fig:single_vs_openmp}
 \end{figure}
+
+Neste experimento é possível ver o \textit{overhead} causado pelo uso das
+diretivas de compilação. A versão sequencial de \texttt{mult.c} foi mais rápida
+do que as versões com uma \textit{thread}, em todos os tamanhos de matriz, nas
+arquiteturas \textbf{hpops2} (Figura \ref{fig:hpops2_cmp_single}) e
+\textbf{hpops2\_O3}(Figura \ref{fig:hpops2_O3_cmp_single}). Na arquitetura
+\textbf{HAL8k} (Figura \ref{fig:8k_cmp_single}), por outro lado, podemos
+observar que a versão com uma única \textit{thread} OpenMP ganha da
+versão sequencial, para tamanhos de matriz grandes o suficiente. Nossa
+interpretação é que essa diferença não é significativa, pois é devida a
+variações nas medições.
+
+Na arquitetura \textbf{hpops2\_O3}, vemos que a otimização do GCC \texttt{-O3}
+produziu \textit{speedups} para todas as versões, inclusive a sequencial.
+Essa otimização beneficiou mais as versões sequencial, de paralelização do
+laço do meio, e de paralelização do laço mais externo, em matrizes de tamanho
+pequeno.
+
 
 \subsubsection{Paralelização do Laço mais Externo (de 1 a 16 \textit{threads})}
 
@@ -320,6 +321,7 @@ a paralelização do laço mais interno tem resultados mais rápidos.
     \caption{OpenMP com duas \textit{threads}, em todas as versões de paralelização}\label{fig:animals}
 \end{figure}
 
+\newpage
 \subsubsection{OpenMP com 4 \textit{Threads} (em todas as versões de paralelização)}
 
 Nesta Seção apresentamos os resultados para as arquiteturas \textbf{hpops}
@@ -355,10 +357,11 @@ paralelizações.
     \caption{OpenMP com quatro \textit{Threads}, em todas as versões de paralelização}\label{fig:animals}
 \end{figure}
 
+\newpage
 \subsubsection{Compilação com a \textit{flag} \texttt{-O3}}
 
-Nesta seção vemos a comparação da execução da paralelização do laço
-mais interno em relação à otimização \texttt{-O3}, na arquitetura
+Na Figura \ref{fig:cmpo3} vemos a comparação da execução da paralelização do 
+laço mais interno em relação à otimização \texttt{-O3}, na arquitetura
 \textbf{hpops}. O uso da otimização sempre melhorou os resultados.
 
 \begin{figure}[H]
@@ -375,14 +378,14 @@ mais interno em relação à otimização \texttt{-O3}, na arquitetura
         \caption{4 \textit{threads}}
         \label{fig:hpops_o3_4t}
     \end{subfigure}
-    \caption{\textbf{hpops}, compilação com a \textit{flag} \texttt{-O3}}\label{fig:animals}
+    \caption{\textbf{hpops}, compilação com a \textit{flag} \texttt{-O3}}\label{fig:cmpo3}
 \end{figure}
 
 \subsubsection{Usando Diferentes Versões do GCC e do Kernel}
 
-Finalmente, apresentamos resultados utilizando diferentes versões
-do kernel do linux e do compilador GCC, na mesma arquitetura.
-(Ver \textbf{hpops} e \textbf{hpops2}, na Seção \ref{sec:arch})
+Finalmente, apresentamos na Figura \ref{fig:cmpv} resultados utilizando 
+diferentes versões do kernel do linux e do compilador GCC, na mesma 
+arquitetura. (Ver \textbf{hpops} e \textbf{hpops2}, na Seção \ref{sec:arch})
 
 Apesar de serem versões bem próximas, é possível notar um pequeno
 \textit{speedup} na versão mais nova.
@@ -394,9 +397,10 @@ Apesar de serem versões bem próximas, é possível notar um pequeno
         \caption{hpops e hpops2}
         \label{fig:hpops_hpops2}
     \end{subfigure}%
-    \caption{OpenMP em diferentes versões do GCC e Kernel}\label{fig:animals}
+    \caption{OpenMP em diferentes versões do GCC e Kernel}\label{fig:cmpv}
 \end{figure}
 
+\newpage
 \section{Conclusões} \label{sec:dis}
 
 Pudemos observar o custo de se paralelizar um programa
@@ -404,7 +408,24 @@ mas não utilizar os recursos de paralelismo, isto é,
 utilizar as diretivas de compilação do OpenMP mas
 executar o programa em apenas uma \textit{thread}.
 
+Constatamos que simplesmente aumentar o número de \textit{threads}
+não beneficia todas as arquiteturas, em relação a um programa
+já paralelizado. O número de núcleos de processamento disponíveis
+impactou a relação entre o desempenho de programas com mais e
+menos \textit{threads}.
 
+Também foi possível observar que a estratégia de paralelização ---
+o laço escolhido para paralelizar, no nosso caso --- tem diferentes
+resultados dependendo do tamanho da entrada. Em particular, a
+paralelização do laço mais interno usando \textit{reduction}
+tem desempenho pior para entradas pequenas, mas vence as outras
+estratégias conforme as matrizes ficam maiores.
+
+Observamos o efeito do parâmetro de compilação \texttt{-O3},
+que sempre produziu programas com melhor desempenho, em comparação à
+compilação sem o parâmetro. Finalmente, observamos um desempenho mais
+rápido utilizando um compilador e um kernel mais novos, mesmo que
+não sejam versões muito distantes.
 
 %\newpage
 %\bibliographystyle{plainnat}
