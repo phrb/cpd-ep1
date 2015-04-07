@@ -8,7 +8,7 @@ MAKEINDEX = makeindex
 pdf: $(BASE_NAME).pdf
 ps: $(BASE_NAME).ps
 
-$(BASE_NAME).pdf: $(BASE_NAME).tex 
+$(BASE_NAME).pdf: $(BASE_NAME).tex architectures.tex 
 	$(PDFLATEX) $<
 	$(BIBTEX) $(BASE_NAME)
 	$(MAKEINDEX) $(BASE_NAME) 
@@ -16,7 +16,7 @@ $(BASE_NAME).pdf: $(BASE_NAME).tex
 	$(PDFLATEX) $<
 	$(PDFLATEX) $<
 
-$(BASE_NAME).ps: $(BASE_NAME).tex 
+$(BASE_NAME).ps: $(BASE_NAME).tex architectures.tex 
 	$(LATEX) $<
 	$(BIBTEX) $(BASE_NAME) 
 	$(MAKEINDEX) $(BASE_NAME) 
