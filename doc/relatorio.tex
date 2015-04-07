@@ -122,46 +122,12 @@ filhos criem suas próprias \textit{thread pools} e não entrem em
     \label{fig:fork_hangs}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \begin{lstlisting}
-    % ./fork_hangs
-    para_a
-    para_a
-    a ended
-    id=22884
-    id=0
-    para_b
-    {...} (hangs)
-    \end{lstlisting}
-    \caption{Saída de \texttt{failing-example/fork\_hangs.c}}
-    \label{fig:fork_hangs_out}
-\end{figure}
-
 \subsection{Código Corrigido}\label{sec:fixed}
 \begin{figure}[H]
     \centering
     \lstinputlisting[language=C, firstline=5, lastline=32]{../failing-example/fork.c}
     \caption{\texttt{failing-example/fork.c}}
     \label{fig:fork}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \begin{lstlisting}
-    % ./fork
-    id=23077
-    id=0
-    para_a
-    para_a
-    a ended
-    para_b
-    para_b
-    b ended
-    %
-    \end{lstlisting}
-    \caption{Saída de \texttt{failing-example/fork.c}}
-    \label{fig:fork_out}
 \end{figure}
 
 \section{Exercício 2} \label{sec:ex2}
@@ -259,7 +225,8 @@ acesso privados, através do parâmetro \textit{private}.
 
 No laço mais interno, utilizamos uma variável temporária para que pudéssemos
 utilizar o parâmetro \textit{reduction}, que não pode ser usado nos elementos
-da matriz \textit{c}.
+da matriz \textit{c}. A seguir está o código da nossa implementação com a 
+variável temporária.
 
 \subsubsection{Paralelização do Laço mais Interno}
 
@@ -270,28 +237,35 @@ da matriz \textit{c}.
     \label{fig:par_v1}
 \end{figure}
 
-\subsubsection{Paralelização do Laço do Meio}
-
-\begin{figure}[H]
-    \centering
-    \lstinputlisting[language=C, firstline=58, lastline=65]{../src/mult_par_v2.c}
-    \caption{\texttt{src/mult\_par\_v2.c}}
-    \label{fig:par_v2}
-\end{figure}
-
-\subsubsection{Paralelização do Laço mais Externo}
-
-\begin{figure}[H]
-    \centering
-    \lstinputlisting[language=C, firstline=58, lastline=65]{../src/mult_par_v3.c}
-    \caption{\texttt{src/mult\_par\_v3.c}}
-    \label{fig:par_v3}
-\end{figure}
-
 \subsection{Resultados} \label{sec:res}
 
-\newpage
+Esta Seção apresenta os resultados obtidos nas arquiteturas \textbf{hpops}
+(e variações), \textbf{mops} e \textbf{HAL8k} --- ver Seção \ref{sec:arch}.
+Em cada Subseção, são apresentados os respectivos gráficos e discussão dos
+resultados. Os valores dos pontos em cada gráfico são a média ao longo de
+10 medições, como especificado no enunciado.
+
+Alguns resultados foram omitidos por conta da falta de espaço na
+documentação, mas estão armazenados em arquivos
+\texttt{[nome\_da\_arquitetura].result}, nos diretórios
+\texttt{result/[nome\_da\_arquitetura]/}. As arquiteturas
+
 \subsubsection{Uma \textit{thread} OpenMP vs. Algoritmo Sequencial}
+
+Neste experimento é possível ver o \textit{overhead} causado pelo uso das
+diretivas de compilação. A versão sequencial de \texttt{mult.c} foi mais rápida
+do que as versões com uma \textit{thread}, em todos os tamanhos de matriz, nas
+arquiteturas \textbf{hpops2} (Figura \ref{fig:hpops2_cmp_single}) e
+\textbf{hpops2\_O3}(Figura \ref{fig:hpops2_O3_cmp_single}). Na arquitetura
+\textbf{HAL8k}(Figura \ref{fig:8k_cmp_single}), por outro lado, podemos
+observar que a versão com uma única \textit{thread} OpenMP ganha da
+versão sequencial, para tamanhos de matriz grandes o suficiente. (Porque?)
+
+Na arquitetura \textbf{hpops2\_O3}, vemos que a otimização do GCC \texttt{-O3}
+produziu \textit{speedups} para todas as versões, inclusive a sequencial.
+Essa otimização beneficiou mais as versões sequencial, de paralelização do
+laço do meio, e de paralelização do laço mais externo, em matrizes de tamanho
+pequeno. (Porque?)
 
 \begin{figure}[H]
     \centering
@@ -314,11 +288,18 @@ da matriz \textit{c}.
         \caption{hpops2}
         \label{fig:hpops2_cmp_single}
     \end{subfigure}
-    \caption{Uma \textit{thread} OpenMP vs. Algoritmo Sequencial}\label{fig:animals}
+    \caption{Uma \textit{thread} OpenMP vs. Algoritmo Sequencial}\label{fig:single_vs_openmp}
 \end{figure}
 
-\newpage
 \subsubsection{Paralelização do Laço mais Externo (de 1 a 16 \textit{threads})}
+
+Este experimento foi realizado nas arquiteturas \textbf{hpops}
+(Figuras \ref{fig:hpops2_O3_par_threads} e \ref{fig:hpops2_par_threads}),
+\textbf{mops} (Figura \ref{fig:mops_par_threads}) e \textbf{HAL8k}
+(Figura \ref{fig:8k_par_threads}). Utilizamos o laço mais externo
+nesta comparação porque foi a modificação que apresentou os melhores
+resultados em todos os experimentos.
+
 \begin{figure}[H]
     \centering
     \begin{subfigure}[H]{0.5\textwidth}
@@ -350,8 +331,14 @@ da matriz \textit{c}.
     \caption{Comparação de \textit{threads} (de 1 a 16), na paralelização do Laço mais Externo}\label{fig:animals}
 \end{figure}
 
-\newpage
 \subsubsection{OpenMP com 2 \textit{threads} (em todas as versões de paralelização)}
+
+Neste experimento podemos observar que a paralelização do laço mais 
+interno, usando \textit{reduction}, teve tempo de execução menor
+do que as outras versões para matrizes pequenas, mas essa diferença
+diminui ao aumentar o tamanho das matrizes. Para matrizes grandes,
+o laço mais interno fica mais rápido.
+
 \begin{figure}[H]
     \centering
     \begin{subfigure}[H]{0.5\textwidth}
