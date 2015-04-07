@@ -37,11 +37,12 @@ set term png truecolor size 1000,800 enhanced font 'Verdana,16'
 #set term x11
 set key inside
 set key b
-set yrange [100:1000000000]
-set xrange [30:1500]
+set yrange [2000:1000000000]
+set xrange [150:1500]
 set logscale y
 set logscale x
 set pointsize 3
+set xtics (200,600,1200)
 
 set xlabel "Matrix size [N]"
 set ylabel "Time [us]"
