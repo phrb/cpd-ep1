@@ -169,7 +169,7 @@ acesso privados, através do parâmetro \textit{private}.
 
 No laço mais interno, utilizamos uma variável temporária para que pudéssemos
 utilizar o parâmetro \textit{reduction}, que não pode ser usado nos elementos
-da matriz \textit{c}. A seguir está o código da nossa implementação com a 
+da matriz \textit{c}. A seguir está o código da nossa implementação com a
 variável temporária.
 
 \subsubsection{Paralelização do Laço mais Interno}
@@ -201,15 +201,17 @@ diretivas de compilação. A versão sequencial de \texttt{mult.c} foi mais ráp
 do que as versões com uma \textit{thread}, em todos os tamanhos de matriz, nas
 arquiteturas \textbf{hpops2} (Figura \ref{fig:hpops2_cmp_single}) e
 \textbf{hpops2\_O3}(Figura \ref{fig:hpops2_O3_cmp_single}). Na arquitetura
-\textbf{HAL8k}(Figura \ref{fig:8k_cmp_single}), por outro lado, podemos
+\textbf{HAL8k} (Figura \ref{fig:8k_cmp_single}), por outro lado, podemos
 observar que a versão com uma única \textit{thread} OpenMP ganha da
-versão sequencial, para tamanhos de matriz grandes o suficiente. (Porque?)
+versão sequencial, para tamanhos de matriz grandes o suficiente. Nossa
+interpretação é que essa diferença não é significativa, pois é devida a
+variações nas medições.
 
 Na arquitetura \textbf{hpops2\_O3}, vemos que a otimização do GCC \texttt{-O3}
 produziu \textit{speedups} para todas as versões, inclusive a sequencial.
 Essa otimização beneficiou mais as versões sequencial, de paralelização do
 laço do meio, e de paralelização do laço mais externo, em matrizes de tamanho
-pequeno. (Porque?)
+pequeno.
 
 \begin{figure}[H]
     \centering
@@ -244,6 +246,13 @@ Este experimento foi realizado nas arquiteturas \textbf{hpops}
 nesta comparação porque foi a modificação que apresentou os melhores
 resultados em todos os experimentos.
 
+É possível observar que a execução na arquitetura com mais \textit{cores}
+(\textbf{HAL8k}, Figura \ref{fig:8k_par_threads}) se beneficiou mais
+do aumento do número de \textit{threads}. Nas demais arquiteturas a
+variação no número de \textit{threads} também impactou o resultado em
+comparação com o programa sequencial, mas mais \textit{threads} não
+implicaram num resultado muito melhor.
+
 \begin{figure}[H]
     \centering
     \begin{subfigure}[H]{0.5\textwidth}
@@ -277,11 +286,15 @@ resultados em todos os experimentos.
 
 \subsubsection{OpenMP com 2 \textit{threads} (em todas as versões de paralelização)}
 
-Neste experimento podemos observar que a paralelização do laço mais 
+Nesta Seção apresentamos os resultados para as arquiteturas \textbf{hpops}
+(Figuras \ref{fig:hpops2_O3_cmp_2t} e \ref{fig:hpops2_cmp_2t}) e \textbf{HAL8k}
+(Figura \ref{fig:8k_cmp_2t}).
+
+Neste experimento podemos observar que a paralelização do laço mais
 interno, usando \textit{reduction}, teve tempo de execução menor
 do que as outras versões para matrizes pequenas, mas essa diferença
 diminui ao aumentar o tamanho das matrizes. Para matrizes grandes,
-o laço mais interno fica mais rápido.
+a paralelização do laço mais interno tem resultados mais rápidos.
 
 \begin{figure}[H]
     \centering
@@ -307,34 +320,47 @@ o laço mais interno fica mais rápido.
     \caption{OpenMP com duas \textit{threads}, em todas as versões de paralelização}\label{fig:animals}
 \end{figure}
 
-\newpage
 \subsubsection{OpenMP com 4 \textit{Threads} (em todas as versões de paralelização)}
+
+Nesta Seção apresentamos os resultados para as arquiteturas \textbf{hpops}
+(Figuras \ref{fig:hpops2_O3_cmp_4t} e \ref{fig:hpops2_cmp_4t}) e \textbf{HAL8k}
+(Figura \ref{fig:8k_cmp_4t}).
+
+Analogamente ao exemplo com duas \textit{threads}, vemos que a paralelização do
+laço mais interno fica mais rápida conforme aumentamos o tamanho das matrizes,
+em todas as arquiteturas, apesar de demorar mais para vencer as outras
+paralelizações.
+
 \begin{figure}[H]
     \centering
     \begin{subfigure}[H]{0.5\textwidth}
         \includegraphics[width=\textwidth]{HAL_cmp_versions-4t}
         \caption{HAL8k}
-        \label{fig:8k_cmp_2t}
+        \label{fig:8k_cmp_4t}
     \end{subfigure}%
     ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
     %(or a blank line to force the subfigure onto a new line)
     \begin{subfigure}[H]{0.5\textwidth}
         \includegraphics[width=\textwidth]{hpops2_O3_cmp_versions-4t}
         \caption{hpops2\_O3}
-        \label{fig:hpops2_O3_cmp_2t}
+        \label{fig:hpops2_O3_cmp_4t}
     \end{subfigure}
     ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
     %(or a blank line to force the subfigure onto a new line)
     \begin{subfigure}[H]{0.5\textwidth}
         \includegraphics[width=\textwidth]{hpops2_cmp_versions-4t}
         \caption{hpops2}
-        \label{fig:hpops2_cmp_2t}
+        \label{fig:hpops2_cmp_4t}
     \end{subfigure}%
     \caption{OpenMP com quatro \textit{Threads}, em todas as versões de paralelização}\label{fig:animals}
 \end{figure}
 
-\newpage
 \subsubsection{Compilação com a \textit{flag} \texttt{-O3}}
+
+Nesta seção vemos a comparação da execução da paralelização do laço
+mais interno em relação à otimização \texttt{-O3}, na arquitetura
+\textbf{hpops}. O uso da otimização sempre melhorou os resultados.
+
 \begin{figure}[H]
     \centering
     \begin{subfigure}[H]{0.5\textwidth}
@@ -352,8 +378,15 @@ o laço mais interno fica mais rápido.
     \caption{\textbf{hpops}, compilação com a \textit{flag} \texttt{-O3}}\label{fig:animals}
 \end{figure}
 
-\newpage
 \subsubsection{Usando Diferentes Versões do GCC e do Kernel}
+
+Finalmente, apresentamos resultados utilizando diferentes versões
+do kernel do linux e do compilador GCC, na mesma arquitetura.
+(Ver \textbf{hpops} e \textbf{hpops2}, na Seção \ref{sec:arch})
+
+Apesar de serem versões bem próximas, é possível notar um pequeno
+\textit{speedup} na versão mais nova.
+
 \begin{figure}[H]
     \centering
     \begin{subfigure}[H]{0.5\textwidth}
@@ -363,7 +396,10 @@ o laço mais interno fica mais rápido.
     \end{subfigure}%
     \caption{OpenMP em diferentes versões do GCC e Kernel}\label{fig:animals}
 \end{figure}
-\subsection{Conclusões} \label{sec:dis}
+
+\section{Conclusões} \label{sec:dis}
+
+
 
 %\newpage
 %\bibliographystyle{plainnat}
