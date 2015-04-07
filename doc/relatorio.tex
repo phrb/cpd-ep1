@@ -187,7 +187,10 @@ Esta Seção apresenta os resultados obtidos nas arquiteturas \textbf{hpops}
 (e variações), \textbf{mops} e \textbf{HAL8k} --- ver Seção \ref{sec:arch}.
 Em cada Subseção, são apresentados os respectivos gráficos e discussão dos
 resultados. Os valores dos pontos em cada gráfico são a média ao longo de
-10 medições, como especificado no enunciado.
+10 medições, como especificado no enunciado. 
+Não apresentamos os cálculos de variância, pois tivemos dúvidas sobre se a 
+distribuição das amostras seria normal e simétrica, no caso de medições onde o 
+valor mínimo é restrito pelo hardware.
 
 Alguns resultados foram omitidos por conta da falta de espaço na
 documentação, mas estão armazenados em arquivos
@@ -221,9 +224,9 @@ documentação, mas estão armazenados em arquivos
 \end{figure}
 
 Neste experimento é possível ver o \textit{overhead} causado pelo uso das
-diretivas de compilação. A versão sequencial de \texttt{mult.c} foi mais rápida
-do que as versões com uma \textit{thread}, em todos os tamanhos de matriz, nas
-arquiteturas \textbf{hpops2} (Figura \ref{fig:hpops2_cmp_single}) e
+diretivas de compilação. A versão sequencial de \texttt{mult.c} foi levemente
+mais rápida do que as versões com uma \textit{thread}, em todos os tamanhos de 
+matriz, nas arquiteturas \textbf{hpops2} (Figura \ref{fig:hpops2_cmp_single}) e
 \textbf{hpops2\_O3}(Figura \ref{fig:hpops2_O3_cmp_single}). Na arquitetura
 \textbf{HAL8k} (Figura \ref{fig:8k_cmp_single}), por outro lado, podemos
 observar que a versão com uma única \textit{thread} OpenMP ganha da
@@ -237,22 +240,7 @@ Essa otimização beneficiou mais as versões sequencial, de paralelização do
 laço do meio, e de paralelização do laço mais externo, em matrizes de tamanho
 pequeno.
 
-
 \subsubsection{Paralelização do Laço mais Externo (de 1 a 16 \textit{threads})}
-
-Este experimento foi realizado nas arquiteturas \textbf{hpops}
-(Figuras \ref{fig:hpops2_O3_par_threads} e \ref{fig:hpops2_par_threads}),
-\textbf{mops} (Figura \ref{fig:mops_par_threads}) e \textbf{HAL8k}
-(Figura \ref{fig:8k_par_threads}). Utilizamos o laço mais externo
-nesta comparação porque foi a modificação que apresentou os melhores
-resultados em todos os experimentos.
-
-É possível observar que a execução na arquitetura com mais \textit{cores}
-(\textbf{HAL8k}, Figura \ref{fig:8k_par_threads}) se beneficiou mais
-do aumento do número de \textit{threads}. Nas demais arquiteturas a
-variação no número de \textit{threads} também impactou o resultado em
-comparação com o programa sequencial, mas mais \textit{threads} não
-implicaram num resultado muito melhor.
 
 \begin{figure}[H]
     \centering
@@ -284,6 +272,20 @@ implicaram num resultado muito melhor.
     \end{subfigure}
     \caption{Comparação de \textit{threads} (de 1 a 16), na paralelização do Laço mais Externo}\label{fig:animals}
 \end{figure}
+
+Este experimento foi realizado nas arquiteturas \textbf{hpops}
+(Figuras \ref{fig:hpops2_O3_par_threads} e \ref{fig:hpops2_par_threads}),
+\textbf{mops} (Figura \ref{fig:mops_par_threads}) e \textbf{HAL8k}
+(Figura \ref{fig:8k_par_threads}). Utilizamos o laço mais externo
+nesta comparação porque foi a modificação que apresentou os melhores
+resultados em todos os experimentos.
+
+É possível observar que a execução na arquitetura com mais \textit{cores}
+(\textbf{HAL8k}, Figura \ref{fig:8k_par_threads}) se beneficiou mais
+do aumento do número de \textit{threads}. Nas demais arquiteturas a
+variação no número de \textit{threads} também impactou o resultado em
+comparação com o programa sequencial, mas mais \textit{threads} não
+implicaram num resultado muito melhor.
 
 \subsubsection{OpenMP com 2 \textit{threads} (em todas as versões de paralelização)}
 
@@ -403,12 +405,13 @@ Apesar de serem versões bem próximas, é possível notar um pequeno
 \newpage
 \section{Conclusões} \label{sec:dis}
 
-Esperávamos poder observar o custo de se paralelizar um programa
+Esperávamos poder observar claramente o custo de se paralelizar um programa
 mas não utilizar os recursos de paralelismo, isto é,
 utilizar as diretivas de compilação do OpenMP mas
 executar o programa em apenas uma \textit{thread}. No entanto,
-os resultados obtidos na comparação realizada não foram conclusivos,
-e não pudemos observar esse custo com clareza.
+os resultados obtidos na comparação realizada não nos permitiram
+observar esse custo com clareza, pois as medições foram
+sempre muito próximas.
 
 Constatamos que simplesmente aumentar o número de \textit{threads}
 beneficia todas as arquiteturas, em relação a um programa
